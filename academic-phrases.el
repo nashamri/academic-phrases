@@ -2,7 +2,7 @@
 (require 'ht)
 (require 's)
 
-(setq phrases
+(setq *phrases*
       (ht
        (:cat1 (ht (:title "Establishing why your topic X is important")
                   (:items (list
@@ -96,6 +96,7 @@
                            (ht (:id 28)
                                (:template "X will [{1}] be an issue that ...")
                                (:choices '(("soon" "shortly" "rapidly" "inevitably"))))))))
+
        (:cat4 (ht (:title "Indicating the gap in knowledge and possible limitations")
                   (:items (list
                            (ht (:id 29)
@@ -182,6 +183,7 @@
                            (ht (:id 56)
                                (:template "In the light of recent events in x, there is now [{1}] concern about ...")
                                (:choices '(("some" "much" "considerable"))))))))
+
        (:cat5 (ht (:title "Stating the aim of your paper and its contribution")
                   (:items (list
                            (ht (:id 57)
@@ -235,45 +237,60 @@
       (apply #'ht-get* (ht-get table (car keys)) (cdr keys))
     (ht-get table (car keys))))
 
+(defun ht-select-keys (table keys)
+  "Return a copy of TABLE with only the specified KEYS."
+  (let (result)
+    (setq result (make-hash-table :test (hash-table-test table)))
+    (dolist (key keys result)
+      (if (not (equal (gethash key table 'key-not-found) 'key-not-found))
+          (puthash key (gethash key table) result)))))
+
 (defun replace-placeholders (tmp choices)
   (s-replace-all `(("{1}" . ,(s-join "/" (car choices)))
                    ("{2}" . ,(s-join "/" (cadr choices))))
                   tmp))
 
-(defun prompt-categories ()
+(defun prompt-categories (phrases)
   (ht-map (lambda (k v) (ht-get* phrases k :title))
           phrases))
 
-(defun prompt-items (cat)
+(defun prompt-items (cat &optional phrases)
+  "..."
+  (unless phrases (setq phrases *phrases*))
   (mapcar (lambda (h)
            (cons (replace-placeholders
                    (ht-get h :template)
                    (ht-get h :choices))
             (ht-get h :id)))
-         (get-items cat)))
+         (get-items cat phrases)))
 
-(defun filter-item (cat id)
-  (let* ((items (get-items cat))
+(defun filter-item (cat id &optional phrases)
+  "..."
+  (unless phrases (setq phrases *phrases*))
+  (let* ((items (get-items cat phrases))
          (match (car (-filter (lambda (i)
                                 (equal (ht-get i :id) id))
                               items))))
        match))
 
-(defun get-cat (res)
+(defun get-cat (res &optional phrases)
+  "..."
+  (unless phrases (setq phrases *phrases*))
   (let ((item (ht-find (lambda (k v)
                          (equal (ht-get v :title)
                                 res))
                        phrases)))
     (car item)))
 
-(defun get-items (cat)
-   (ht-get* phrases cat :items))
+(defun get-items (cat &optional phrases)
+  "..."
+  (unless phrases (setq phrases *phrases*))
+  (ht-get* phrases cat :items))
 
-(defun academic-phrases ()
-  (interactive)
+(defun academic-phrases-insert (phrases)
   (let* ((res (completing-read "Choose category:"
-                               (prompt-categories) nil t))
-         (cat (get-cat res))
+                               (prompt-categories phrases) nil t))
+         (cat (get-cat res phrases))
          (items (prompt-items cat))
          (id (cdr (assoc (completing-read "Choose a phrase:"
                                           items nil t)
@@ -292,3 +309,14 @@
                                   ("[{2}]" . ,choice2))
                                  template)))
     (insert phrase)))
+
+(defun academic-phrases-by-section (section &optional phrases)
+  "..."
+  (unless phrases (setq phrases *phrases*))
+  (cond ((equal section :abstract) (setq cats '(:cat1 :cat3)))
+        (t (setq cats '(:cat1 :cat2 :cat3 :cat4 :cat5))))
+  (academic-phrases-insert (ht-select-keys phrases cats)))
+
+(defun academic-phrases ()
+  (interactive)
+  (academic-phrases-insert *phrases*))
