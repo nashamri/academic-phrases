@@ -410,6 +410,13 @@
   (unless phrases (setq phrases *phrases*))
   (ht-get* phrases cat :items))
 
+(defun gen-cats-keywords (s e)
+  "..."
+  (let* ((i (-iterate '1+ s (- e (1- s))))
+         (cats (mapcar (lambda (c)
+                         (concat ":cat" (number-to-string c))) i)))
+    (mapcar 'intern-soft cats)))
+
 (defun academic-phrases-insert (phrases)
   (let* ((res (completing-read "Choose category:"
                                (prompt-categories phrases) nil t))
@@ -436,8 +443,15 @@
 (defun academic-phrases-by-section (section &optional phrases)
   "..."
   (unless phrases (setq phrases *phrases*))
-  (cond ((equal section :abstract) (setq cats '(:cat1 :cat3)))
-        (t (setq cats '(:cat1 :cat2 :cat3 :cat4 :cat5))))
+  (cond ((equal section :abstract) (setq cats '(:cat1 :cat2 :cat4 :cat5)))
+        ((equal section :intro) (setq cats (gen-cats-keywords 1 16)))
+        ((equal section :review) (setq cats (concatenate 'list '(:cat4) (gen-cats-keywords 9 16))))
+        ((equal section :methods) (setq cats (gen-cats-keywords 17 30)))
+        ((equal section :results) (setq cats (gen-cats-keywords 29 40)))
+        ((equal section :discussion) (setq cats (gen-cats-keywords 35 45)))
+        ((equal section :conclusion) (setq cats (gen-cats-keywords 45 51)))
+        ((equal section :acknowledgments) (setq cats '(:cat52)))
+        (t (setq cats (gen-cats-keywords 1 57))))
   (academic-phrases-insert (ht-select-keys phrases cats)))
 
 (defun academic-phrases ()
