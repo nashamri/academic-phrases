@@ -456,6 +456,7 @@
                             (ht (:id 140)
                                 (:template  "Many attempts have been made [Marvin 2009, Aurthur 2010, Zaphod 2011] [{1}] ...")
                                 (:choices '(("in order to" "with the purpose of" "aimed at"))))))))
+
        (:cat12 (ht (:title "Reporting what specific authors have said")
                    (:items (list
                             (ht (:id 141)
@@ -496,7 +497,22 @@
                                 (:choices '(("lists" "outlines" "describes" "provides"))))
                             (ht (:id 153)
                                 (:template  "Her [{1}] is based on ...")
-                                (:choices '(("theory" "solution" "proposal" "method" "approach"))))
+                                (:choices '(("theory" "solution" "proposal" "method" "approach"))))))))
+
+       (:cat13 (ht (:title "Mentioning positive aspects of others’ work")
+                   (:items (list
+                            (ht (:id 154)
+                                (:template  "Marvin’s [42] use of X is [{1}].")
+                                (:choices '(("fully justified" "very plausible" "endorsed by experience"))))
+                            (ht (:id 155)
+                                (:template  "Marvin’s [42] assumptions seem to be [{1}].")
+                                (:choices '(("realistic" "well-founded" "well-grounded" "plausible" "reasonable" "acceptable"))))
+                            (ht (:id 156)
+                                (:template  "The equations given in [42] are [{1}] ...")
+                                (:choices '(("accurate" "comprehensive"))))
+                            (ht (:id 157)
+                                (:template  "It has been suggested [42] that ... and this seems to be a [{1}] approach ...")
+                                (:choices '(("reliable" "useful" "innovative"))))
                             (ht (:id 999)
                                 (:template "")
                                 (:choices '(())))))))))
