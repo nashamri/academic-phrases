@@ -935,8 +935,9 @@
 
 (defun replace-placeholders (tmp choices)
   (s-replace-all `(("{1}" . ,(s-join "/" (car choices)))
-                   ("{2}" . ,(s-join "/" (cadr choices))))
-                  tmp))
+                   ("{2}" . ,(s-join "/" (cadr choices)))
+                   ("{3}" . ,(s-join "/" (caddr choices))))
+                 tmp))
 
 (defun prompt-categories (phrases)
   (ht-map (lambda (k v) (ht-get* phrases k :title))
@@ -1000,8 +1001,13 @@
                         (completing-read phrase-prompt
                                          (cadr (ht-get item :choices))
                                          nil t)))
+         (choice3 (when (s-contains? "{3}" template)
+                        (completing-read phrase-prompt
+                                     (caddr (ht-get item :choices))
+                                     nil t)))
          (phrase (s-replace-all `(("[{1}]" . ,choice1)
-                                  ("[{2}]" . ,choice2))
+                                  ("[{2}]" . ,choice2)
+                                  ("[{3}]" . ,choice3))
                                  template)))
     (insert phrase)))
 
