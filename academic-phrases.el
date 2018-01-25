@@ -42,7 +42,6 @@
                            (ht (:id 12)
                                (:template "X [{1}] for")
                                (:choices '(("accounts" "is responsible"))))))))
-
        (:cat2 (ht (:title "Outlining the past-present history of the study of X")
                   (:items (list
                            (ht (:id 13)
@@ -78,7 +77,6 @@
                            (ht (:id 23)
                                (:template "X has become a [{1}] issue in ...")
                                (:choices '(("central" "an important" "a critical"))))))))
-
        (:cat3 (ht (:title "Outlining the possible future of X")
                   (:items (list
                            (ht (:id 24)
@@ -96,7 +94,6 @@
                            (ht (:id 28)
                                (:template "X will [{1}] be an issue that ...")
                                (:choices '(("soon" "shortly" "rapidly" "inevitably"))))))))
-
        (:cat4 (ht (:title "Indicating the gap in knowledge and possible limitations")
                   (:items (list
                            (ht (:id 29)
@@ -183,7 +180,6 @@
                            (ht (:id 56)
                                (:template "In the light of recent events in x, there is now [{1}] concern about ...")
                                (:choices '(("some" "much" "considerable"))))))))
-
        (:cat5 (ht (:title "Stating the aim of your paper and its contribution")
                   (:items (list
                            (ht (:id 57)
@@ -228,7 +224,6 @@
                            (ht (:id 70)
                                (:template "We [{1}] solution for ...")
                                (:choices '(("describe" "present" "consider" "analyze a novel" "simple" "radical" "interesting"))))))))
-
        (:cat6 (ht (:title "Explaining the key terminology in your field")
                   (:items (list
                            (ht (:id 71)
@@ -276,7 +271,6 @@
                            (ht (:id 85)
                                (:template "[{1}]: X, Y and Z.")
                                (:choices '(("There are three kinds of languages" "The three kinds of languages are" "Languages can be divided into three kinds"))))))))
-
        (:cat7 (ht (:title "Explaining how you will use terminology and acronyms in your paper")
                   (:items (list
                            (ht (:id 86)
@@ -312,7 +306,6 @@
                            (ht (:id 96)
                                (:template "We will [{1}] how relevant this is in the next subsection.")
                                (:choices '(("see" "learn" "appreciate"))))))))
-
        (:cat8 (ht (:title "Giving the structure of paper - what is and is not included")
                   (:items (list
                            (ht (:id 97)
@@ -351,7 +344,6 @@
                            (ht (:id 108)
                                (:template  "For reasons of space, X is not [{1}] in this paper.")
                                (:choices '(("addressed" "dealt with" "considered"))))))))
-
        (:cat9 (ht (:title "Giving general panorama of past-to-present literature")
                   (:items (list
                            (ht (:id 109)
@@ -396,7 +388,6 @@
                            (ht (:id 122)
                                (:template  "Much work on the potential of X has been carried out [Ref], [{1}] there are still somecritical issues ... [Ref]")
                                (:choices '(("yet" "however"))))))))
-
        (:cat10 (ht (:title "Reviewing past literature")
                    (:items (list
                             (ht (:id 123)
@@ -420,7 +411,6 @@
                             (ht (:id 129)
                                 (:template  "An increase in X was first [{1}] by ...")
                                 (:choices '(("noted" "reported" "found"))))))))
-
        (:cat11 (ht (:title "Reviewing subsequent and more recent literature")
                    (:items (list
                             (ht (:id 130)
@@ -456,7 +446,6 @@
                             (ht (:id 140)
                                 (:template  "Many attempts have been made [Marvin 2009, Aurthur 2010, Zaphod 2011] [{1}] ...")
                                 (:choices '(("in order to" "with the purpose of" "aimed at"))))))))
-
        (:cat12 (ht (:title "Reporting what specific authors have said")
                    (:items (list
                             (ht (:id 141)
@@ -498,7 +487,6 @@
                             (ht (:id 153)
                                 (:template  "Her [{1}] is based on ...")
                                 (:choices '(("theory" "solution" "proposal" "method" "approach"))))))))
-
        (:cat13 (ht (:title "Mentioning positive aspects of others’ work")
                    (:items (list
                             (ht (:id 154)
@@ -513,7 +501,6 @@
                             (ht (:id 157)
                                 (:template  "It has been suggested [42] that ... and this seems to be a [{1}] approach ...")
                                 (:choices '(("reliable" "useful" "innovative"))))))))
-
        (:cat14 (ht (:title "Highlighting limitations of previous studies - authors not mentioned by name")
                    (:items (list
                             (ht (:id 158)
@@ -558,7 +545,6 @@
                             (ht (:id 171)
                                 (:template  "Other observations [{1}] that this explanation is insufficient ...")
                                 (:choices '(("indicate" "would seem to suggest"))))))))
-
        (:cat15 (ht (:title "Highlighting limitations of previous studies - authors mentioned by name")
                    (:items (list
                             (ht (:id 172)
@@ -615,7 +601,6 @@
                             (ht (:id 189)
                                 (:template "An even greater source of [{1}] is ...")
                                 (:choices '(("concern" "issue" "problem"))))))))
-
        (:cat16 (ht (:title "Using the opinions of others to justify your criticism of someone’s work")
                    (:items (list
                             (ht (:id 190)
@@ -645,7 +630,6 @@
                             (ht (:id 198)
                                 (:template "The most well-known critic of Sadie’s findings is ... who [{1}] that an alternative explanation [{2}] ...")
                                 (:choices '(("argued" "proposed" "suggested") ("might be that" "could be found in"))))))))
-
        (:cat17 (ht (:title "Describing purpose of testing / methods used")
                    (:items (list
                             (ht (:id 199)
@@ -669,7 +653,6 @@
                             (ht (:id 205)
                                 (:template "[{1}] in order to ...")
                                 (:choices '(("X was done" "We did X"))))))))
-
        (:cat18 (ht (:title "Outlining similarities with other authors’ models, systems etc.")
                    (:items (list
                             (ht (:id 206)
@@ -702,7 +685,6 @@
                             (ht (:id 215)
                                 (:template "This component is fully compliant with international [{1}].")
                                 (:choices '(("norms" "regulations" "standards"))))))))
-
        (:cat19 (ht (:title "Describing the apparatus and materials used and their source")
                    (:items (list
                             (ht (:id 216)
@@ -732,7 +714,6 @@
                             (ht (:id 224)
                                 (:template "X was kindly [{1}] by Prof Big.")
                                 (:choices '(("provided" "supplied"))))))))
-
        (:cat20 (ht (:title "Reporting software used")
                    (:items (list
                             (ht (:id 225)
@@ -756,7 +737,6 @@
                             (ht (:id 231)
                                 (:template "Free software, downloaded from www.free.edu, was [{1}] to ...")
                                 (:choices '(("used" "adopted"))))))))
-
        (:cat21 (ht (:title "Reporting customizations performed")
                    (:items (list
                             (ht (:id 232)
@@ -777,7 +757,6 @@
                             (ht (:id 237)
                                 (:template "The resulting ad hoc device [{1}] ...")
                                 (:choices '(("can" "is able to" "has the capacity to"))))))))
-
        (:cat22 (ht (:title "Formulating equations, theories and theorems")
                    (:items (list
                             (ht (:id 238)
@@ -825,7 +804,6 @@
                             (ht (:id 252)
                                 (:template "For [{1}] , we")
                                 (:choices '(("the sake of simplicity" "reasons of space"))))))))
-
        (:cat23 (ht (:title "Explaining why you chose your specific method, model, equipment, sample etc.")
                    (:items (list
                             (ht (:id 253)
@@ -855,7 +833,6 @@
                             (ht (:id 261)
                                 (:template "Having an X [{1}] do Y.")
                                 (:choices '(("enabled us to" "allowed us to" "meant that we could"))))))))
-
        (:cat24 (ht (:title "Explaining the preparation of samples, solutions etc.")
                    (:items (list
                             (ht (:id 262)
@@ -882,7 +859,6 @@
                             (ht (:id 269)
                                 (:template "This was done [{1}] a calculator.")
                                 (:choices '(("by means of" "using" "with"))))))))
-
        (:cat25 (ht (:title "Outlining selection procedure for samples, surveys etc.")
                    (:items (list
                             (ht (:id 270)
@@ -914,7 +890,143 @@
                                 (:choices '(("performed" "conducted" "carried out"))))
                             (ht (:id 279)
                                 (:template "The interviewees were [{1}] into two groups [{2}] of ...")
-                                (:choices '(("divided" "split" "broken down") ("based on" "on the basis"))))
+                                (:choices '(("divided" "split" "broken down") ("based on" "on the basis"))))))))
+       (:cat26 (ht (:title "Indicating the time frame (past tenses)")
+                   (:items (list
+                            (ht (:id 280)
+                                (:template "Initial studies were [{1}] using the conditions described")
+                                (:choices '(("made" "performed" "done" "carried out" "executed"))))
+                            (ht (:id 281)
+                                (:template "above [{1}] a period of ...")
+                                (:choices '(("over" "for"))))
+                            (ht (:id 282)
+                                (:template "X was [{1}] during the [{2}] step.")
+                                (:choices '(("collected" "used" "tested" "characterized" "assessed") ("first" "initial"))))
+                            (ht (:id 283)
+                                (:template "[{1}] X, we did Y.")
+                                (:choices '(("Prior to" "Before doing"))))
+                            (ht (:id 284)
+                                (:template "First we [{1}] the value of X [{2}], we [{3}] Y.")
+                                (:choices '(("estimated" "determined") ("then" "subsequently") ("studied" "analyzed" "evaluated"))))
+                            (ht (:id 285)
+                                (:template "[{1}] had been done, we then did Y.")
+                                (:choices '(("Once" "As soon as" "After X"))))
+                            (ht (:id 286)
+                                (:template "The levels were [{1}] set at ...")
+                                (:choices '(("thus" "consequently" "therefore"))))
+                            (ht (:id 287)
+                                (:template "[{1}] X was subjected to Y.")
+                                (:choices '(("After" "Afterwards" "Following this,"))))
+                            (ht (:id 288)
+                                (:template "The [{1}] Xs were then ...")
+                                (:choices '(("resulting" "remaining"))))
+                            (ht (:id 289)
+                                (:template "The experiment was then [{1}] under conditions in which ...")
+                                (:choices '(("repeated" "replicated"))))
+                            (ht (:id 290)
+                                (:template "Finally, [{1}] tests were performed on the ...")
+                                (:choices '(("independent" "separate" "further" "additional"))))))))
+       (:cat27 (ht (:title "Indicating the time frame in a general process (present tenses)")
+                   (:items (list
+                            (ht (:id 291)
+                                (:template "[{1}] of the process ...")
+                                (:choices '(("In the first step" "During the first phase" "In the initial stage"))))
+                            (ht (:id 292)
+                                (:template "[{1}] X has been done, we can then do Y.")
+                                (:choices '(("Once" "As soon as" "After"))))
+                            (ht (:id 293)
+                                (:template "[{1}] for the next step.")
+                                (:choices '(("This sets the stage" "We are now ready"))))
+                            (ht (:id 294)
+                                (:template "[{1}] X can be ...")
+                                (:choices '(("At this point" "Now"))))
+                            (ht (:id 295)
+                                (:template "[{1}] these steps have been carried out, X ...")
+                                (:choices '(("After" "When" "As soon as"))))
+                            (ht (:id 296)
+                                (:template "[{1}], we are now ready to ...")
+                                (:choices '(("With the completion of these steps" "When these steps have been completed"))))
+                            (ht (:id 297)
+                                (:template "This condition cannot be reached [{1}] X has been ...")
+                                (:choices '(("until" "unless"))))
+                            (ht (:id 298)
+                                (:template "[{1}] X is ready, the final adjustments can be made.")
+                                (:choices '(("When" "As soon as"))))
+                            (ht (:id 299)
+                                (:template "The completed X can [{1}] be used to ...")
+                                (:choices '(("now" "then" "subsequently"))))
+                            (ht (:id 300)
+                                (:template "[{1}], Y can then be done.")
+                                (:choices '(("By reducing the amount of X" "If the amount of X is reduced"))))
+                            (ht (:id 301)
+                                (:template "[{1}] all the Xs in a container.")
+                                (:choices '(("To reduce the risk of Y, place" "The risk of X can be reduced by placing"))))
+                            (ht (:id 302)
+                                (:template "The experiment [{1}] following the steps outlined below.")
+                                (:choices '(("proceeds" "continues"))))))))
+       (:cat28 (ht (:title "Indicating that care must be taken")
+                   (:items (list
+                            (ht (:id 303)
+                                (:template "To do this [{1}] doing X.")
+                                (:choices '(("entails" "involves" "requires"))))
+                            (ht (:id 304)
+                                (:template "It is [{1}] practical to ...")
+                                (:choices '(("seldom" "rarely" "usually" "generally" "often" "always"))))
+                            (ht (:id 305)
+                                (:template "[{1}] care are must be [{2}] when ...")
+                                (:choices '(("Considerable" "Great") ("taken" "exercised"))))
+                            (ht (:id 306)
+                                (:template "[{1}] attention must be paid when ...")
+                                (:choices '(("A great deal of" "Considerable"))))
+                            (ht (:id 307)
+                                (:template "Extreme caution must be [{1}] when ...")
+                                (:choices '(("taken" "used"))))))))
+       (:cat29 (ht (:title "Describing benefits of your method, equipment etc.")
+                   (:items (list
+                            (ht (:id 308)
+                                (:template "This method represents a [{1}] alternative to ...")
+                                (:choices '(("viable" "valuable" "useful" "groundbreaking" "innovative"))))
+                            (ht (:id 309)
+                                (:template "This equipment has the [{1}] to outperform all previous Xs.")
+                                (:choices '(("ability" "capacity" "potential"))))
+                            (ht (:id 310)
+                                (:template "This apparatus has [{1}] interesting [{2}].")
+                                (:choices '(("several" "many") ("features" "characteristics"))))
+                            (ht (:id 311)
+                                (:template "Our method has many [{1}] applications.")
+                                (:choices '(("interesting" "attractive" "beneficial" "useful" "practical" "effective" "valuable"))))
+                            (ht (:id 312)
+                                (:template "Of [{1}] interest is ...")
+                                (:choices '(("particular" "major" "fundamental"))))
+                            (ht (:id 313)
+                                (:template "The [{1}] advantages are:")
+                                (:choices '(("key" "basic" "chief" "crucial" "decisive" "essential" "fundamental" "important" "main" "major" "principal"))))
+                            (ht (:id 314)
+                                (:template "Our procedure is a clear [{1}] on current methods.")
+                                (:choices '(("improvement" "advance"))))
+                            (ht (:id 315)
+                                (:template "We believe this solution will [{1}] researchers to ...")
+                                (:choices '(("aid" "assist"))))
+                            (ht (:id 316)
+                                (:template "This solution [{1}] previous methods by ...")
+                                (:choices '(("improves on" "enhances" "furthers" "advances"))))
+                            (ht (:id 317)
+                                (:template "The [{1}] in terms of X far outweigh the disadvantages with regard to Y.")
+                                (:choices '(("benefits" "advantages"))))))))
+       (:cat30 (ht (:title "Outlining alternative approaches ")
+                   (:items (list
+                            (ht (:id 318)
+                                (:template "A less [{1}] approach is ...")
+                                (:choices '(("lengthy" "time-consuming" "cumbersome" "costly"))))
+                            (ht (:id 319)
+                                (:template "A [{1}] solution for this problem ...")
+                                (:choices '(("neater" "more elegant" "simplified" "more practical"))))
+                            (ht (:id 320)
+                                (:template "An alternative solution, though [{1}] is ...")
+                                (:choices '(("with high overheads" "slightly more complicated" "less exhaustive"))))
+                            (ht (:id 321)
+                                (:template "[{1}] way to avoid the use of X is to use Y instead.")
+                                (:choices '(("One" "One possible" "A good"))))
 
                             (ht (:id 999)
                                 (:template "")
