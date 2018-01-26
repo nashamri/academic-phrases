@@ -2,7 +2,7 @@
 (require 'ht)
 (require 's)
 
-(setq *phrases*
+(setq academic-phrases--all-phrases
       (ht
        (:cat1 (ht (:title "Establishing why your topic X is important")
                   (:items (list
@@ -1895,12 +1895,12 @@
                                 (:template "More details on this topic can be found in [Ref].")
                                 (:choices '(())))))))))
 
-(defun ht-get* (table &rest keys)
+(defun academic-phrases//ht-get* (table &rest keys)
   (if (cdr keys)
-      (apply #'ht-get* (ht-get table (car keys)) (cdr keys))
+      (apply #'academic-phrases//ht-get* (ht-get table (car keys)) (cdr keys))
     (ht-get table (car keys))))
 
-(defun ht-select-keys (table keys)
+(defun academic-phrases//ht-select-keys (table keys)
   "Return a copy of TABLE with only the specified KEYS."
   (let (result)
     (setq result (make-hash-table :test (hash-table-test table)))
@@ -1908,50 +1908,50 @@
       (if (not (equal (gethash key table 'key-not-found) 'key-not-found))
           (puthash key (gethash key table) result)))))
 
-(defun replace-placeholders (tmp choices)
+(defun academic-phrases//replace-placeholders (tmp choices)
   (s-replace-all `(("{1}" . ,(s-join "/" (car choices)))
                    ("{2}" . ,(s-join "/" (cadr choices)))
                    ("{3}" . ,(s-join "/" (caddr choices))))
                  tmp))
 
-(defun prompt-categories (phrases)
-  (ht-map (lambda (k v) (ht-get* phrases k :title))
+(defun academic-phrass//prompt-categories (phrases)
+  (ht-map (lambda (k v) (academic-phrases//ht-get* phrases k :title))
           phrases))
 
-(defun prompt-items (cat &optional phrases)
+(defun academic-phrases//prompt-items (cat &optional phrases)
   "..."
-  (unless phrases (setq phrases *phrases*))
+  (unless phrases (setq phrases academic-phrases--all-phrases))
   (mapcar (lambda (h)
-           (cons (replace-placeholders
+           (cons (academic-phrases//replace-placeholders
                    (ht-get h :template)
                    (ht-get h :choices))
             (ht-get h :id)))
-         (get-items cat phrases)))
+         (academic-phrases//get-items cat phrases)))
 
-(defun filter-item (cat id &optional phrases)
+(defun academic-phrases//filter-item (cat id &optional phrases)
   "..."
-  (unless phrases (setq phrases *phrases*))
-  (let* ((items (get-items cat phrases))
+  (unless phrases (setq phrases academic-phrases--all-phrases))
+  (let* ((items (academic-phrases//get-items cat phrases))
          (match (car (-filter (lambda (i)
                                 (equal (ht-get i :id) id))
                               items))))
        match))
 
-(defun get-cat (res &optional phrases)
+(defun academic-phrases//get-cat (res &optional phrases)
   "..."
-  (unless phrases (setq phrases *phrases*))
+  (unless phrases (setq phrases academic-phrases--all-phrases))
   (let ((item (ht-find (lambda (k v)
                          (equal (ht-get v :title)
                                 res))
                        phrases)))
     (car item)))
 
-(defun get-items (cat &optional phrases)
+(defun academic-phrases//get-items (cat &optional phrases)
   "..."
-  (unless phrases (setq phrases *phrases*))
-  (ht-get* phrases cat :items))
+  (unless phrases (setq phrases academic-phrases--all-phrases))
+  (academic-phrases//ht-get* phrases cat :items))
 
-(defun gen-cats-keywords (s e)
+(defun academic-phrases//gen-cats-keywords (s e)
   "..."
   (let* ((i (-iterate '1+ s (- e (1- s))))
          (cats (mapcar (lambda (c)
@@ -1960,13 +1960,13 @@
 
 (defun academic-phrases-insert (phrases)
   (let* ((res (completing-read "Choose category:"
-                               (prompt-categories phrases) nil t))
-         (cat (get-cat res phrases))
-         (items (prompt-items cat))
+                               (academic-phrass//prompt-categories phrases) nil t))
+         (cat (academic-phrases//get-cat res phrases))
+         (items (academic-phrases//prompt-items cat))
          (id (cdr (assoc (completing-read "Choose a phrase:"
                                           items nil t)
                          items)))
-         (item (filter-item cat id))
+         (item (academic-phrases//filter-item cat id))
          (phrase-prompt (car (rassoc id items)))
          (template (ht-get item :template))
          (choice1 (when (s-contains? "{1}" template)
@@ -1989,18 +1989,19 @@
 
 (defun academic-phrases-by-section (section &optional phrases)
   "..."
-  (unless phrases (setq phrases *phrases*))
+  (unless phrases (setq phrases academic-phrases--all-phrases))
   (cond ((equal section :abstract) (setq cats '(:cat1 :cat2 :cat4 :cat5)))
-        ((equal section :intro) (setq cats (gen-cats-keywords 1 16)))
-        ((equal section :review) (setq cats (concatenate 'list '(:cat4) (gen-cats-keywords 9 16))))
-        ((equal section :methods) (setq cats (gen-cats-keywords 17 30)))
-        ((equal section :results) (setq cats (gen-cats-keywords 29 40)))
-        ((equal section :discussion) (setq cats (gen-cats-keywords 35 45)))
-        ((equal section :conclusion) (setq cats (gen-cats-keywords 45 51)))
+        ((equal section :intro) (setq cats (academic-phrases//gen-cats-keywords 1 16)))
+        ((equal section :review) (setq cats (concatenate 'list '(:cat4) (academic-phrases//gen-cats-keywords 9 16))))
+        ((equal section :methods) (setq cats (academic-phrases//gen-cats-keywords 17 30)))
+        ((equal section :results) (setq cats (academic-phrases//gen-cats-keywords 29 40)))
+        ((equal section :discussion) (setq cats (academic-phrases//gen-cats-keywords 35 45)))
+        ((equal section :conclusion) (setq cats (academic-phrases//gen-cats-keywords 45 51)))
         ((equal section :acknowledgments) (setq cats '(:cat52)))
-        (t (setq cats (gen-cats-keywords 1 57))))
-  (academic-phrases-insert (ht-select-keys phrases cats)))
+        (t (setq cats (academic-phrases//gen-cats-keywords 1 57))))
+  (academic-phrases-insert (academic-phrases//ht-select-keys phrases cats)))
 
 (defun academic-phrases ()
   (interactive)
-  (academic-phrases-insert *phrases*))
+  (academic-phrases-insert academic-phrases--all-phrases))
+
