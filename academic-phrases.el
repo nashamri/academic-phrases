@@ -1,3 +1,21 @@
+;;; academic-phrases.el --- Bypass that mental block, when writing your academic papers.
+
+;; Copyright (C) 2010-2018 Your Name
+
+;; Author: Nasser Alshammari <designernasser@gmail.com>
+;; Created: 20 Jul 2018
+;; Keywords: academic, papers
+;; Homepage: https://github.com/nashamri/academic-phrases
+;; Version: 0.0.1
+
+;; This file is not part of GNU Emacs.
+
+;; This file is free software...
+
+;; along with this file.  If not, see <http://www.gnu.org/licenses/>.
+
+;;; Code:
+
 (require 'dash)
 (require 'ht)
 (require 's)
@@ -2001,7 +2019,9 @@
         (t (setq cats (academic-phrases//gen-cats-keywords 1 57))))
   (academic-phrases-insert (academic-phrases//ht-select-keys phrases cats)))
 
+;;;###autoload
 (defun academic-phrases ()
   (interactive)
   (academic-phrases-insert academic-phrases--all-phrases))
 
+;;; academic-phrases.el ends here
