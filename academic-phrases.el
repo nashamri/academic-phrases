@@ -1976,8 +1976,8 @@
                          (concat ":cat" (number-to-string c))) i)))
     (mapcar 'intern-soft cats)))
 
-(defun academic-phrases-insert (phrases)
-  (let* ((res (completing-read "Choose category:"
+(defun academic-phrases//insert (phrases)
+  (let* ((res (completing-read "Choose a category:"
                                (academic-phrass//prompt-categories phrases) nil t))
          (cat (academic-phrases//get-cat res phrases))
          (items (academic-phrases//prompt-items cat))
@@ -2005,7 +2005,7 @@
                                  template)))
     (insert phrase)))
 
-(defun academic-phrases-by-section (section &optional phrases)
+(defun academic-phrases//insert-by-section (section &optional phrases)
   "..."
   (unless phrases (setq phrases academic-phrases--all-phrases))
   (cond ((equal section :abstract) (setq cats '(:cat1 :cat2 :cat4 :cat5)))
@@ -2017,11 +2017,27 @@
         ((equal section :conclusion) (setq cats (academic-phrases//gen-cats-keywords 45 51)))
         ((equal section :acknowledgments) (setq cats '(:cat52)))
         (t (setq cats (academic-phrases//gen-cats-keywords 1 57))))
-  (academic-phrases-insert (academic-phrases//ht-select-keys phrases cats)))
+  (academic-phrases//insert (academic-phrases//ht-select-keys phrases cats)))
 
 ;;;###autoload
 (defun academic-phrases ()
   (interactive)
-  (academic-phrases-insert academic-phrases--all-phrases))
+  (academic-phrases//insert academic-phrases--all-phrases))
+
+;;;###autoload
+(defun academic-phrases-by-section ()
+  (interactive)
+  (let* ((sections '(("Abstract" . :abstract)
+                     ("Introduction" . :intro)
+                     ("Literature Review" . :review)
+                     ("Methods" . :methods)
+                     ("Results" . :results)
+                     ("Disscussion" . :discussion)
+                     ("Conclusions" . :conclusion)
+                     ("Acknowledgements" . :acknowledgments)))
+         (res (completing-read "Choose a section:"
+                               sections nil t))
+         (sec (cdr (assoc res sections))))
+   (academic-phrases//insert-by-section sec)))
 
 ;;; academic-phrases.el ends here
