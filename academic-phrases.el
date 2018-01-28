@@ -20,7 +20,7 @@
 (require 'ht)
 (require 's)
 
-(setq academic-phrases--all-phrases
+(defvar academic-phrases--all-phrases
       (ht
        (:cat1 (ht (:title "Establishing why your topic X is important")
                   (:items (list
