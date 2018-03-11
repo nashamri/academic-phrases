@@ -4,8 +4,8 @@
 
 ;; Author: Nasser Alshammari <designernasser@gmail.com>
 ;; Version: 0.0.1
-;; Package-Requires: ((dash "2.13.0") (s "1.12.0") (ht "2.2"))
-;; Keywords: academic, writing, papers
+;; Package-Requires: ((dash "2.12.0") (s "1.12.0") (ht "2.2"))
+;; Keywords: academic, convenience, papers, writing, wp
 ;; Homepage: https://github.com/nashamri/academic-phrases
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -1939,49 +1939,49 @@
                                 (:template "More details on this topic can be found in [Ref].")
                                 (:choices '(())))))))))
 
-(defun academic-phrases//ht-get* (table &rest keys)
-  (if (cdr keys)
-      (apply #'academic-phrases//ht-get* (ht-get table (car keys)) (cdr keys))
-    (ht-get table (car keys))))
+;; (defun academic-phrases//ht-get* (table &rest keys)
+;;   (if (cdr keys)
+;;       (apply #'academic-phrases//ht-get* (ht-get table (car keys)) (cdr keys))
+;;     (ht-get table (car keys))))
 
-(defun academic-phrases//ht-select-keys (table keys)
-  "Return a copy of TABLE with only the specified KEYS."
-  (let (result)
-    (setq result (make-hash-table :test (hash-table-test table)))
-    (dolist (key keys result)
-      (if (not (equal (gethash key table 'key-not-found) 'key-not-found))
-          (puthash key (gethash key table) result)))))
+;; (defun academic-phrases//ht-select-keys (table keys)
+;;   "Return a copy of TABLE with only the specified KEYS."
+;;   (let (result)
+;;     (setq result (make-hash-table :test (hash-table-test table)))
+;;     (dolist (key keys result)
+;;       (if (not (equal (gethash key table 'key-not-found) 'key-not-found))
+;;           (puthash key (gethash key table) result)))))
 
-(defun academic-phrases//replace-placeholders (tmp choices)
+(defun academic-phrases--replace-placeholders (tmp choices)
   (s-replace-all `(("{1}" . ,(s-join "/" (car choices)))
                    ("{2}" . ,(s-join "/" (cadr choices)))
                    ("{3}" . ,(s-join "/" (caddr choices))))
                  tmp))
 
-(defun academic-phrass//prompt-categories (phrases)
+(defun academic-phrases--prompt-categories (phrases)
   (ht-map (lambda (k v) (academic-phrases//ht-get* phrases k :title))
           phrases))
 
-(defun academic-phrases//prompt-items (cat &optional phrases)
+(defun academic-phrases--prompt-items (cat &optional phrases)
   "..."
   (unless phrases (setq phrases academic-phrases--all-phrases))
   (mapcar (lambda (h)
-           (cons (academic-phrases//replace-placeholders
+           (cons (academic-phrases--replace-placeholders
                    (ht-get h :template)
                    (ht-get h :choices))
             (ht-get h :id)))
-         (academic-phrases//get-items cat phrases)))
+         (academic-phrases--get-items cat phrases)))
 
-(defun academic-phrases//filter-item (cat id &optional phrases)
+(defun academic-phrases--filter-item (cat id &optional phrases)
   "..."
   (unless phrases (setq phrases academic-phrases--all-phrases))
-  (let* ((items (academic-phrases//get-items cat phrases))
+  (let* ((items (academic-phrases--get-items cat phrases))
          (match (car (-filter (lambda (i)
                                 (equal (ht-get i :id) id))
                               items))))
        match))
 
-(defun academic-phrases//get-cat (res &optional phrases)
+(defun academic-phrases--get-cat (res &optional phrases)
   "..."
   (unless phrases (setq phrases academic-phrases--all-phrases))
   (let ((item (ht-find (lambda (k v)
@@ -1990,27 +1990,27 @@
                        phrases)))
     (car item)))
 
-(defun academic-phrases//get-items (cat &optional phrases)
+(defun academic-phrases--get-items (cat &optional phrases)
   "..."
   (unless phrases (setq phrases academic-phrases--all-phrases))
   (academic-phrases//ht-get* phrases cat :items))
 
-(defun academic-phrases//gen-cats-keywords (s e)
+(defun academic-phrases--gen-cats-keywords (s e)
   "..."
   (let* ((i (-iterate '1+ s (- e (1- s))))
          (cats (mapcar (lambda (c)
                          (concat ":cat" (number-to-string c))) i)))
     (mapcar 'intern-soft cats)))
 
-(defun academic-phrases//insert (phrases)
+(defun academic-phrases--insert (phrases)
   (let* ((res (completing-read "Choose a category:"
-                               (academic-phrass//prompt-categories phrases) nil t))
-         (cat (academic-phrases//get-cat res phrases))
-         (items (academic-phrases//prompt-items cat))
+                               (academic-phrases--prompt-categories phrases) nil t))
+         (cat (academic-phrases--get-cat res phrases))
+         (items (academic-phrases--prompt-items cat))
          (id (cdr (assoc (completing-read "Choose a phrase:"
                                           items nil t)
                          items)))
-         (item (academic-phrases//filter-item cat id))
+         (item (academic-phrases--filter-item cat id))
          (phrase-prompt (car (rassoc id items)))
          (template (ht-get item :template))
          (choice1 (when (s-contains? "{1}" template)
@@ -2031,24 +2031,24 @@
                                  template)))
     (insert phrase)))
 
-(defun academic-phrases//insert-by-section (section &optional phrases)
+(defun academic-phrases--insert-by-section (section &optional phrases)
   "..."
   (unless phrases (setq phrases academic-phrases--all-phrases))
   (cond ((equal section :abstract) (setq cats '(:cat1 :cat2 :cat4 :cat5)))
-        ((equal section :intro) (setq cats (academic-phrases//gen-cats-keywords 1 16)))
-        ((equal section :review) (setq cats (concatenate 'list '(:cat4) (academic-phrases//gen-cats-keywords 9 16))))
-        ((equal section :methods) (setq cats (academic-phrases//gen-cats-keywords 17 30)))
-        ((equal section :results) (setq cats (academic-phrases//gen-cats-keywords 29 40)))
-        ((equal section :discussion) (setq cats (academic-phrases//gen-cats-keywords 35 45)))
-        ((equal section :conclusion) (setq cats (academic-phrases//gen-cats-keywords 45 51)))
+        ((equal section :intro) (setq cats (academic-phrases--gen-cats-keywords 1 16)))
+        ((equal section :review) (setq cats (concatenate 'list '(:cat4) (academic-phrases--gen-cats-keywords 9 16))))
+        ((equal section :methods) (setq cats (academic-phrases--gen-cats-keywords 17 30)))
+        ((equal section :results) (setq cats (academic-phrases--gen-cats-keywords 29 40)))
+        ((equal section :discussion) (setq cats (academic-phrases--gen-cats-keywords 35 45)))
+        ((equal section :conclusion) (setq cats (academic-phrases--gen-cats-keywords 45 51)))
         ((equal section :acknowledgments) (setq cats '(:cat52)))
-        (t (setq cats (academic-phrases//gen-cats-keywords 1 57))))
-  (academic-phrases//insert (academic-phrases//ht-select-keys phrases cats)))
+        (t (setq cats (academic-phrases--gen-cats-keywords 1 57))))
+  (academic-phrases--insert (academic-phrases//ht-select-keys phrases cats)))
 
 ;;;###autoload
 (defun academic-phrases ()
   (interactive)
-  (academic-phrases//insert academic-phrases--all-phrases))
+  (academic-phrases--insert academic-phrases--all-phrases))
 
 ;;;###autoload
 (defun academic-phrases-by-section ()
@@ -2058,12 +2058,13 @@
                      ("Literature Review" . :review)
                      ("Methods" . :methods)
                      ("Results" . :results)
-                     ("Disscussion" . :discussion)
+                     ("Discussion" . :discussion)
                      ("Conclusions" . :conclusion)
                      ("Acknowledgements" . :acknowledgments)))
          (res (completing-read "Choose a section:"
                                sections nil t))
          (sec (cdr (assoc res sections))))
-   (academic-phrases//insert-by-section sec)))
+   (academic-phrases--insert-by-section sec)))
 
+(provide 'academic-phrases)
 ;;; academic-phrases.el ends here
