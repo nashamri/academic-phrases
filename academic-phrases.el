@@ -1,18 +1,44 @@
 ;;; academic-phrases.el --- Bypass that mental block, when writing your academic papers.
 
-;; Copyright (C) 2010-2018 Your Name
+;; Copyright (C) 2017-2018 Nasser Alshammari
 
 ;; Author: Nasser Alshammari <designernasser@gmail.com>
-;; Created: 20 Jul 2018
-;; Keywords: academic, papers
-;; Homepage: https://github.com/nashamri/academic-phrases
 ;; Version: 0.0.1
+;; Package-Requires: ((dash "2.13.0") (s "1.12.0") (ht "2.2"))
+;; Keywords: academic, writing, papers
+;; Homepage: https://github.com/nashamri/academic-phrases
 
-;; This file is not part of GNU Emacs.
+;; This program is free software; you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation, either version 3 of the License, or
+;; (at your option) any later version.
 
-;; This file is free software...
+;; This program is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
 
-;; along with this file.  If not, see <http://www.gnu.org/licenses/>.
+;; You should have received a copy of the GNU General Public License
+;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+;;; Commentary:
+
+;; When writing your academic paper, you might get stuck trying to
+;; find the right phrase that captures your intention. This package
+;; tries to alleviate that problem by presenting you with a list of
+;; phrases organized by the topic or by the paper section that you
+;; are writing. This package has around 600 phrases so far.
+
+;; Using this package is easy, just call `M-x academic-phrases` to
+;; get a list of phrases organized by topic, or call
+;; `academic-phrases-by-section` to browse the phrases by the paper
+;; section.
+
+;; This work was based on the freely available PDF titled "English
+;; for Writing Research Papers Useful Phrases" which can be found
+;; here <http://www.springer.com/gb/book/9783319260921>. This work
+;; was done with the kind permission of Springer Nature and Adrian
+;; Wallwork.
 
 ;;; Code:
 
