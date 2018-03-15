@@ -1939,7 +1939,15 @@
                                 (:template "More details on this topic can be found in [Ref].")
                                 (:choices '(())))))))))
 
+;; The next two functions (academic-phrases--ht-get* and
+;; academic-phrases--ht-select-keys) are taken from the excellent package ht.el
+;; <https://github.com/Wilfred/ht.el> and are available for ht.el >= 2.2. I
+;; included them here just to be self-contained and because spacemacs uses an
+;; older version of ht.el (version 2.0)
 (defun academic-phrases--ht-get* (table &rest keys)
+  "Starting with TABLE, Look up KEYS in nested hash tables.
+The lookup for each key should return another hash table, except
+for the final key, which may return any value."
   (if (cdr keys)
       (apply #'academic-phrases--ht-get* (ht-get table (car keys)) (cdr keys))
     (ht-get table (car keys))))
@@ -1959,11 +1967,10 @@
                  tmp))
 
 (defun academic-phrases--prompt-categories (phrases)
-  (ht-map (lambda (k v) (academic-phrases--ht-get* phrases k :title))
+  (ht-map (lambda (k _) (academic-phrases--ht-get* phrases k :title))
           phrases))
 
 (defun academic-phrases--prompt-items (cat &optional phrases)
-  "..."
   (unless phrases (setq phrases academic-phrases--all-phrases))
   (mapcar (lambda (h)
            (cons (academic-phrases--replace-placeholders
@@ -1973,7 +1980,6 @@
          (academic-phrases--get-items cat phrases)))
 
 (defun academic-phrases--filter-item (cat id &optional phrases)
-  "..."
   (unless phrases (setq phrases academic-phrases--all-phrases))
   (let* ((items (academic-phrases--get-items cat phrases))
          (match (car (-filter (lambda (i)
@@ -1982,21 +1988,18 @@
        match))
 
 (defun academic-phrases--get-cat (res &optional phrases)
-  "..."
   (unless phrases (setq phrases academic-phrases--all-phrases))
-  (let ((item (ht-find (lambda (k v)
+  (let ((item (ht-find (lambda (_ v)
                          (equal (ht-get v :title)
                                 res))
                        phrases)))
     (car item)))
 
 (defun academic-phrases--get-items (cat &optional phrases)
-  "..."
   (unless phrases (setq phrases academic-phrases--all-phrases))
   (academic-phrases--ht-get* phrases cat :items))
 
 (defun academic-phrases--gen-cats-keywords (s e)
-  "..."
   (let* ((i (-iterate '1+ s (- e (1- s))))
          (cats (mapcar (lambda (c)
                          (concat ":cat" (number-to-string c))) i)))
@@ -2032,7 +2035,6 @@
     (insert phrase)))
 
 (defun academic-phrases--insert-by-section (section &optional phrases)
-  "..."
   (unless phrases (setq phrases academic-phrases--all-phrases))
   (cond ((equal section :abstract) (setq cats '(:cat1 :cat2 :cat4 :cat5)))
         ((equal section :intro) (setq cats (academic-phrases--gen-cats-keywords 1 16)))
@@ -2047,11 +2049,13 @@
 
 ;;;###autoload
 (defun academic-phrases ()
+  "Insert a phrase from a list of academic phrases by topic."
   (interactive)
   (academic-phrases--insert academic-phrases--all-phrases))
 
 ;;;###autoload
 (defun academic-phrases-by-section ()
+  "Insert a phrase from a list of academic phrases by the paper section."
   (interactive)
   (let* ((sections '(("Abstract" . :abstract)
                      ("Introduction" . :intro)
