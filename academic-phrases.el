@@ -1,10 +1,10 @@
-;;; academic-phrases.el --- Bypass that mental block, when writing your academic papers.
+;;; academic-phrases.el --- Bypass that mental block when writing your papers. -*- lexical-binding: t -*-
 
 ;; Copyright (C) 2017-2018 Nasser Alshammari
 
 ;; Author: Nasser Alshammari <designernasser@gmail.com>
 ;; Version: 0.0.1
-;; Package-Requires: ((dash "2.12.0") (s "1.12.0") (ht "2.2"))
+;; Package-Requires: ((dash "2.12.0") (s "1.12.0") (ht "2.0") (emacs "24"))
 ;; Keywords: academic, convenience, papers, writing, wp
 ;; Homepage: https://github.com/nashamri/academic-phrases
 
@@ -1939,18 +1939,18 @@
                                 (:template "More details on this topic can be found in [Ref].")
                                 (:choices '(())))))))))
 
-;; (defun academic-phrases//ht-get* (table &rest keys)
-;;   (if (cdr keys)
-;;       (apply #'academic-phrases//ht-get* (ht-get table (car keys)) (cdr keys))
-;;     (ht-get table (car keys))))
+(defun academic-phrases--ht-get* (table &rest keys)
+  (if (cdr keys)
+      (apply #'academic-phrases--ht-get* (ht-get table (car keys)) (cdr keys))
+    (ht-get table (car keys))))
 
-;; (defun academic-phrases//ht-select-keys (table keys)
-;;   "Return a copy of TABLE with only the specified KEYS."
-;;   (let (result)
-;;     (setq result (make-hash-table :test (hash-table-test table)))
-;;     (dolist (key keys result)
-;;       (if (not (equal (gethash key table 'key-not-found) 'key-not-found))
-;;           (puthash key (gethash key table) result)))))
+(defun academic-phrases--ht-select-keys (table keys)
+  "Return a copy of TABLE with only the specified KEYS."
+  (let (result)
+    (setq result (make-hash-table :test (hash-table-test table)))
+    (dolist (key keys result)
+      (if (not (equal (gethash key table 'key-not-found) 'key-not-found))
+          (puthash key (gethash key table) result)))))
 
 (defun academic-phrases--replace-placeholders (tmp choices)
   (s-replace-all `(("{1}" . ,(s-join "/" (car choices)))
@@ -1959,7 +1959,7 @@
                  tmp))
 
 (defun academic-phrases--prompt-categories (phrases)
-  (ht-map (lambda (k v) (academic-phrases//ht-get* phrases k :title))
+  (ht-map (lambda (k v) (academic-phrases--ht-get* phrases k :title))
           phrases))
 
 (defun academic-phrases--prompt-items (cat &optional phrases)
@@ -1993,7 +1993,7 @@
 (defun academic-phrases--get-items (cat &optional phrases)
   "..."
   (unless phrases (setq phrases academic-phrases--all-phrases))
-  (academic-phrases//ht-get* phrases cat :items))
+  (academic-phrases--ht-get* phrases cat :items))
 
 (defun academic-phrases--gen-cats-keywords (s e)
   "..."
@@ -2043,7 +2043,7 @@
         ((equal section :conclusion) (setq cats (academic-phrases--gen-cats-keywords 45 51)))
         ((equal section :acknowledgments) (setq cats '(:cat52)))
         (t (setq cats (academic-phrases--gen-cats-keywords 1 57))))
-  (academic-phrases--insert (academic-phrases//ht-select-keys phrases cats)))
+  (academic-phrases--insert (academic-phrases--ht-select-keys phrases cats)))
 
 ;;;###autoload
 (defun academic-phrases ()
