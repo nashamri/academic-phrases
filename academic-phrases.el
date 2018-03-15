@@ -2006,11 +2006,11 @@ for the final key, which may return any value."
     (mapcar 'intern-soft cats)))
 
 (defun academic-phrases--insert (phrases)
-  (let* ((res (completing-read "Choose a category:"
+  (let* ((res (completing-read "Choose a category: "
                                (academic-phrases--prompt-categories phrases) nil t))
          (cat (academic-phrases--get-cat res phrases))
          (items (academic-phrases--prompt-items cat))
-         (id (cdr (assoc (completing-read "Choose a phrase:"
+         (id (cdr (assoc (completing-read "Choose a phrase: "
                                           items nil t)
                          items)))
          (item (academic-phrases--filter-item cat id))
@@ -2036,16 +2036,17 @@ for the final key, which may return any value."
 
 (defun academic-phrases--insert-by-section (section &optional phrases)
   (unless phrases (setq phrases academic-phrases--all-phrases))
-  (cond ((equal section :abstract) (setq cats '(:cat1 :cat2 :cat4 :cat5)))
-        ((equal section :intro) (setq cats (academic-phrases--gen-cats-keywords 1 16)))
-        ((equal section :review) (setq cats (concatenate 'list '(:cat4) (academic-phrases--gen-cats-keywords 9 16))))
-        ((equal section :methods) (setq cats (academic-phrases--gen-cats-keywords 17 30)))
-        ((equal section :results) (setq cats (academic-phrases--gen-cats-keywords 29 40)))
-        ((equal section :discussion) (setq cats (academic-phrases--gen-cats-keywords 35 45)))
-        ((equal section :conclusion) (setq cats (academic-phrases--gen-cats-keywords 45 51)))
-        ((equal section :acknowledgments) (setq cats '(:cat52)))
-        (t (setq cats (academic-phrases--gen-cats-keywords 1 57))))
-  (academic-phrases--insert (academic-phrases--ht-select-keys phrases cats)))
+  (let ((cats '()))
+    (cond ((equal section :abstract) (setq cats '(:cat1 :cat2 :cat4 :cat5)))
+          ((equal section :intro) (setq cats (academic-phrases--gen-cats-keywords 1 16)))
+          ((equal section :review) (setq cats (concatenate 'list '(:cat4) (academic-phrases--gen-cats-keywords 9 16))))
+          ((equal section :methods) (setq cats (academic-phrases--gen-cats-keywords 17 30)))
+          ((equal section :results) (setq cats (academic-phrases--gen-cats-keywords 29 40)))
+          ((equal section :discussion) (setq cats (academic-phrases--gen-cats-keywords 35 45)))
+          ((equal section :conclusion) (setq cats (academic-phrases--gen-cats-keywords 45 51)))
+          ((equal section :acknowledgments) (setq cats '(:cat52)))
+          (t (setq cats (academic-phrases--gen-cats-keywords 1 57))))
+    (academic-phrases--insert (academic-phrases--ht-select-keys phrases cats))))
 
 ;;;###autoload
 (defun academic-phrases ()
@@ -2065,7 +2066,7 @@ for the final key, which may return any value."
                      ("Discussion" . :discussion)
                      ("Conclusions" . :conclusion)
                      ("Acknowledgements" . :acknowledgments)))
-         (res (completing-read "Choose a section:"
+         (res (completing-read "Choose a section: "
                                sections nil t))
          (sec (cdr (assoc res sections))))
    (academic-phrases--insert-by-section sec)))
