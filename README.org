@@ -1,5 +1,6 @@
 * Academic-phrases
 
+[[https://melpa.org/#/academic-phrases][file:https://melpa.org/packages/academic-phrases-badge.svg]]
 [[http://spacemacs.org][file:https://cdn.rawgit.com/syl20bnr/spacemacs/442d025779da2f62fc86c2082703697714db6514/assets/spacemacs-badge.svg]]
 [[https://www.gnu.org/licenses/gpl-3.0][https://img.shields.io/badge/License-GPL%20v3-blue.svg]]
 
