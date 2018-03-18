@@ -42,6 +42,7 @@
 
 ;;; Code:
 
+(require 'cl-lib)
 (require 'dash)
 (require 'ht)
 (require 's)
@@ -1963,7 +1964,7 @@ for the final key, which may return any value."
 (defun academic-phrases--replace-placeholders (tmp choices)
   (s-replace-all `(("{1}" . ,(s-join "/" (car choices)))
                    ("{2}" . ,(s-join "/" (cadr choices)))
-                   ("{3}" . ,(s-join "/" (caddr choices))))
+                   ("{3}" . ,(s-join "/" (cl-caddr choices))))
                  tmp))
 
 (defun academic-phrases--prompt-categories (phrases)
