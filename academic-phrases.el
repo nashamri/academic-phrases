@@ -19,7 +19,7 @@
 ;; GNU General Public License for more details.
 
 ;; You should have received a copy of the GNU General Public License
-;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
+;; along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 ;;; Commentary:
 
@@ -36,7 +36,7 @@
 
 ;; This work was based on the freely available PDF titled "English
 ;; for Writing Research - Papers Useful Phrases" which can be found
-;; here <http://www.springer.com/gb/book/9783319260921>. This work
+;; here <https://www.springer.com/gb/book/9783319260921>. This work
 ;; was done with the kind permission of Springer Nature and Adrian
 ;; Wallwork.
 
